@@ -1,0 +1,12 @@
+/* Archivo de Estilo */
+body{
+	background-color: black;
+}
+.invisible{
+	display:none;
+}
+#canvas{
+	display: block;
+	margin: auto;
+	border: 1px solid yellow;
+}
