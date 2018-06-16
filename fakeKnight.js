@@ -83,7 +83,7 @@ function redibujar(){
 	desplazamientoX += velX;
 	desplazamientoY += velY;
 	
-	canvas.ctx.clearRect(0, 0, WIDTH, HEIGHT);
+	canvas.ctx.clearRect(-WIDTH*2, -HEIGHT*2, WIDTH*2, HEIGHT*2);
 	canvas.ctx.translate(velX,velY);
 	
 	habitacionActiva.dibujar();
@@ -119,8 +119,8 @@ class Personaje{
 class Habitacion{
 	constructor(){
 		//Ponemos medidas aleatorias
-		this.ancho = aleatorio(10,30);
-		this.alto = aleatorio(8,20);
+		this.ancho = aleatorio(10,100);
+		this.alto = aleatorio(8,200);
 		
 		//Cargamos las imágenes
 		this.cargadas = 0;
@@ -172,10 +172,15 @@ class Habitacion{
 			setTimeout(this.dibujar.bind(this), 100);
 			return;
 		}
-		
+		//Corrección para centrar la habitación en el canvas
+		var corrX = WIDTH/2 - this.ancho * CELDA/2;
+		var corrY = HEIGHT/2 - this.alto * CELDA/2 + 2*CELDA;
 		for(let i = 0; i < this.alto; i++)
-			for (let j = 0; j < this.ancho; j++)
-				dibujar(this.celdas[i][j], 0, 0, this.celdas[i][j].ancho, this.celdas[i][j].alto, MARGEN_X + CELDA * j, MARGEN_Y + CELDA * i - this.celdas[i][j].alto);
+			for (let j = 0; j < this.ancho; j++){
+				var x = CELDA * j + corrX;
+				var y = CELDA * i - this.celdas[i][j].alto + corrY;
+				dibujar(this.celdas[i][j], 0, 0, this.celdas[i][j].ancho, this.celdas[i][j].alto, x, y);
+			}
 	}
 }
 
