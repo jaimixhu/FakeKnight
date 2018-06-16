@@ -83,7 +83,13 @@ function redibujar(){
 	desplazamientoX += velX;
 	desplazamientoY += velY;
 	
-	canvas.ctx.clearRect(-WIDTH*2, -HEIGHT*2, WIDTH*2, HEIGHT*2);
+	//Borrado del área - Al estar desplazada
+	canvas.ctx.save(); 						//Salvamos el contexto actual (la traslación)
+	canvas.ctx.setTransform(1, 0, 0, 1, 0, 0); 			//Usamos la matriz identidad para transformar
+	canvas.ctx.clearRect(0, 0, canvas.width, canvas.height);	//Borramos
+	canvas.ctx.restore();						//Restauramos el estado
+
+	//Desplazamiento de la escena
 	canvas.ctx.translate(velX,velY);
 	
 	habitacionActiva.dibujar();
