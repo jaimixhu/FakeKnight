@@ -119,8 +119,8 @@ class Personaje{
 class Habitacion{
 	constructor(){
 		//Ponemos medidas aleatorias
-		this.ancho = aleatorio(10,100);
-		this.alto = aleatorio(8,200);
+		this.ancho = aleatorio(20,30);
+		this.alto = aleatorio(15,20);
 		
 		//Cargamos las imágenes
 		this.cargadas = 0;
